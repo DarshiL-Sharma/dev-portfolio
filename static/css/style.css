@@ -435,7 +435,97 @@ img { max-width: 100%; display: block; }
   transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .skill-card.visible .skill-fill { width: var(--w); }
+/* =============================================
+   CERTIFICATES
+   ============================================= */
+.certificates { background: var(--bg2); }
 
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.cert-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  transition: var(--transition);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.cert-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cert-card:hover {
+  border-color: var(--accent4);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(255,190,11,0.1);
+}
+
+.cert-icon {
+  font-size: 2.2rem;
+  background: var(--bg3);
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.cert-info { flex: 1; }
+
+.cert-issuer {
+  font-size: 11px;
+  color: var(--accent3);
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--font-mono);
+}
+
+.cert-info h3 {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.cert-info p {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.cert-badge {
+  padding: 7px 14px;
+  border-radius: 50px;
+  border: 1.5px solid var(--accent4);
+  font-size: 12px;
+  color: var(--accent4);
+  transition: var(--transition);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cert-badge:hover {
+  background: var(--accent4);
+  color: #000;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cert-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 1024px) {
+  .cert-grid { grid-template-columns: 1fr 1fr; }
+}
 /* =============================================
    PROJECTS
    ============================================= */
@@ -465,6 +555,7 @@ img { max-width: 100%; display: block; }
 .p1 {background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('../images/blog.png') center/cover no-repeat;}
 .p2 {background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('../images/coffee.png') center/cover no-repeat;}
 .p3 {background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('../images/stock.png') center/cover no-repeat;}
+.p4 {background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('../images/img_1.png') center/cover no-repeat;}
 .project-img::after {
   content: '';
   position: absolute;

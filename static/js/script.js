@@ -213,5 +213,15 @@ if (codeLines.length) {
     }, 600);
   });
 }
-
+// Cert cards reveal
+const certCards = document.querySelectorAll('.cert-card');
+const certObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 120);
+      certObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+certCards.forEach(card => certObserver.observe(card));
 console.log('%c👋 Hey there, fellow dev! Built with ❤️', 'color: #7c3aed; font-size: 14px; font-weight: bold;');
