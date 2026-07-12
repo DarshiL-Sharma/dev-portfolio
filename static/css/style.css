@@ -442,7 +442,7 @@ img { max-width: 100%; display: block; }
 
 .cert-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr); /* CHANGED: now 4 slots instead of 3 */
   gap: 1.5rem;
   width: 100%;
 }
@@ -451,80 +451,62 @@ img { max-width: 100%; display: block; }
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1.8rem;
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
+  overflow: hidden;
+  display: block; /* CHANGED: card is a link now, not a flex row */
   transition: var(--transition);
   opacity: 0;
   transform: translateY(20px);
 }
-
-.cert-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
+.cert-card.visible { opacity: 1; transform: translateY(0); }
 .cert-card:hover {
   border-color: var(--accent4);
   transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(255,190,11,0.1);
+  box-shadow: 0 12px 40px rgba(255,190,11,0.15);
 }
 
-.cert-icon {
-  font-size: 2.2rem;
-  background: var(--bg3);
-  padding: 14px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  flex-shrink: 0;
+/* NEW: actual certificate image on front, same overlay pattern as project cards */
+.cert-img {
+  position: relative;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
 }
+.cert-img.c1 { background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('../images/cert1.png'); }
+.cert-img.c2 { background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('../images/cert2.png'); }
+.cert-img.c3 { background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('../images/cert3.png'); }
+.cert-img.c4 { background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('../images/cert4.png'); }
 
-.cert-info { flex: 1; }
-
-.cert-issuer {
-  font-size: 11px;
-  color: var(--accent3);
-  display: block;
-  margin-bottom: 4px;
-  font-family: var(--font-mono);
+.cert-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: var(--transition);
 }
-
-.cert-info h3 {
-  font-family: var(--font-head);
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 2px;
-}
-
-.cert-info p {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-.cert-badge {
-  padding: 7px 14px;
+.cert-card:hover .cert-overlay { opacity: 1; }
+.cert-view {
+  padding: 8px 18px;
   border-radius: 50px;
   border: 1.5px solid var(--accent4);
-  font-size: 12px;
+  font-size: 13px;
   color: var(--accent4);
-  transition: var(--transition);
-  white-space: nowrap;
-  flex-shrink: 0;
 }
 
-.cert-badge:hover {
-  background: var(--accent4);
-  color: #000;
-}
+.cert-info { padding: 1.2rem 1.5rem; text-align: left; }
+.cert-issuer { font-size: 11px; color: var(--accent3); display: block; margin-bottom: 4px; font-family: var(--font-mono); }
+.cert-info h3 { font-family: var(--font-head); font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+.cert-info p { font-size: 12px; color: var(--text-muted); }
 
-/* Responsive */
+/* Responsive — NEW breakpoints for 4-col grid */
+@media (max-width: 1200px) {
+  .cert-grid { grid-template-columns: repeat(2, 1fr); }
+}
 @media (max-width: 768px) {
   .cert-grid { grid-template-columns: 1fr; }
-}
-@media (max-width: 1024px) {
-  .cert-grid { grid-template-columns: 1fr 1fr; }
 }
 /* =============================================
    PROJECTS
